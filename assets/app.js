@@ -1,8 +1,10 @@
 import './bootstrap.js';
+import 'bootstrap/dist/css/bootstrap.css';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom/client';
 import LoginPage from './js/pages/LoginPage';
 import HomePage from './js/pages/HomePage';
+import Header from './components/Header.jsx';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -16,14 +18,15 @@ import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {
     return (
-      <BrowserRouter>
+      <HashRouter>
+        <Header />
         <main className='container pt-5'>
           <Routes>
-            <Route path="/login" element={ <LoginPage />} />
-            <Route path="/" element={ <HomePage />} />
+            <Route path="/login" exact element={ <LoginPage />} />
+            <Route path="/" exact element={ <HomePage />} />
           </Routes>
         </main>
-      </BrowserRouter>
+      </HashRouter>
     );
 }
 

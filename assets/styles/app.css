@@ -1,0 +1,13 @@
+.bg-canGreen {
+    background-color: #098136 !important;
+  }
+  .menu-logo {
+    width: 20%;
+  }
+nav a {
+    color: #f1a80f !important;
+    font-family: Montserrat, sans-serif;
+  }
+  .footer-container a:hover, nav a:hover {
+    color: #da4d66 !important;
+  }
