@@ -37,19 +37,13 @@ class UserCrudController extends AbstractCrudController
         $fields = [
             IdField::new('id')->hideOnForm(),
             DateField::new('date')->hideOnForm(),
-            EmailField::new('email'),
-            AssociationField::new('categorie'),
-            TextField::new('lastName', 'Nom / Entreprise / Collectivité'),
+            TextField::new('lastName', 'Nom'),
             TextField::new('firstName', 'Prenom')->setRequired(false)->setEmptyData(''),
             ChoiceField::new('roles')
             ->setChoices(array_combine($roles, $roles))
             ->allowMultipleChoices()
             ->renderAsBadges(),
-            TextField::new('tel'),
-            TextField::new('adresse'),
-            TextField::new('ville'),
-            TextField::new('zip', 'Code Postal'),
-            ImageField::new('image')->setUploadDir('assets/images/')
+            ImageField::new('image')->setUploadDir('public/images/avatar/')->setBasePath('public/images/avatar/')
             ->setRequired($pageName === Crud::PAGE_NEW),
             TextEditorField::new('bio'),
         ];

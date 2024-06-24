@@ -19,8 +19,8 @@ class TarifCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            AssociationField::new('categorie', 'Public'),
             AssociationField::new('idPresta', 'Prestation'),
+            AssociationField::new('categorie', 'Public'),
             MoneyField::new('prix_tarif', 'Prix unitaire')->setNumDecimals(2)->setCurrency('EUR'),
             TextField::new('unite_tarif', 'Unité tarifaire'),
         ];

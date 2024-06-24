@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom/client';
 import LoginPage from './js/pages/LoginPage';
 import HomePage from './js/pages/HomePage';
 import Header from './components/Header.jsx';
+import authAPI from './js/services/authAPI.js';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
+import Footer from './components/Footer.jsx';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -12,20 +15,20 @@ import Header from './components/Header.jsx';
  * which should already be in your base.html.twig.
  */
 import './styles/app.css';
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 
 
+// authAPI.setup();
 
 const App = () => {
     return (
       <HashRouter>
         <Header />
-        <main className='container pt-5'>
+        <main className='container py-5'>
           <Routes>
-            <Route path="/login" exact element={ <LoginPage />} />
-            <Route path="/" exact element={ <HomePage />} />
+            <Route exact path="/" element={ <HomePage />} />
           </Routes>
         </main>
+        <Footer />
       </HashRouter>
     );
 }

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import axios from "axios";
+import authAPI from "../services/authAPI";
 
 
 export default function LoginPage (props) {
@@ -9,21 +9,20 @@ export default function LoginPage (props) {
         password : ""
     });
 
-    const handleChange = (event) =>{
-        const value = event.currentTarget.value;
-        const name = event.currentTarget.name;
+    const [error, setError] = useState("");
 
+    const handleChange = ({currentTarget}) =>{
+        const {value, name} = currentTarget;
         setCredentials({...credentials, [name]: value});
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
         try {
-            axios.post("http://localhost:8000/api/login_check", credentials)
-            .then(response => console.log(response))
+            await authAPI.authenticate(credentials);
         } catch (error) {
-            console.log(error.response);
+            setError("Aucun compte avec cet email ou mot de passe incorrect.")
         }
         console.log(credentials);
     }
@@ -38,10 +37,13 @@ export default function LoginPage (props) {
                     value={credentials.username}
                     onChange={handleChange}
                     type="text"
-                    className="form-control"
+                    className={"form-control" + (error && " is-invalid")}
                     placeholder="Adresse mail de connection"
                     name="username"
                     id="username"/>
+                    {error && <p className="invalid-feedback">
+                        {error}
+                    </p>}
                 </div>
                 <div className="form-group py-2">
                     <label htmlFor="password">Mot de passe</label>

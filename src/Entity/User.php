@@ -2,22 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Timestampable;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[HasLifecycleCallbacks]
-#[ApiResource()]
+#[ApiResource(normalizationContext: ['groups' => ['users_read']])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -28,6 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups(['users_read'])]
     private ?string $email = null;
 
     /**
@@ -42,25 +44,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
+    #[Groups(['users_read'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['users_read'])]
     private ?string $lastName = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $tel = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $adresse = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $ville = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $zip = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
     #[Timestampable(on: 'create')]
@@ -70,18 +62,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bio = null;
 
-    #[ORM\ManyToOne]
-    private ?PublicCible $categorie = null;
-
-    /**
-     * @var Collection<int, Message>
-     */
-    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'auteur')]
-    private Collection $messages;
 
     public function __construct()
     {
-        $this->messages = new ArrayCollection();
+        
     }
 
     public function __toString(): string
@@ -199,54 +183,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTel(): ?string
-    {
-        return $this->tel;
-    }
-
-    public function setTel(string $tel): static
-    {
-        $this->tel = $tel;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): static
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): static
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getZip(): ?string
-    {
-        return $this->zip;
-    }
-
-    public function setZip(string $zip): static
-    {
-        $this->zip = $zip;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -279,48 +215,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBio(?string $bio): static
     {
         $this->bio = $bio;
-
-        return $this;
-    }
-
-    public function getCategorie(): ?PublicCible
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?PublicCible $categorie): static
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Message>
-     */
-    public function getMessages(): Collection
-    {
-        return $this->messages;
-    }
-
-    public function addMessage(Message $message): static
-    {
-        if (!$this->messages->contains($message)) {
-            $this->messages->add($message);
-            $message->setAuteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMessage(Message $message): static
-    {
-        if ($this->messages->removeElement($message)) {
-            // set the owning side to null (unless already changed)
-            if ($message->getAuteur() === $this) {
-                $message->setAuteur(null);
-            }
-        }
 
         return $this;
     }
