@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\PrestationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,7 +12,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PrestationRepository::class)]
-#[ApiResource]
+#[ApiResource(operations: [
+    new Get(),
+    new GetCollection()
+])]
 class Prestation
 {
     #[ORM\Id]
@@ -19,13 +24,13 @@ class Prestation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $nomPresta = null;
+    
+    #[ORM\Column(length: 255)]
     private ?string $imagePresta = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $descrPresta = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $nomPresta = null;
 
     /**
      * @var Collection<int, Tarif>

@@ -18,7 +18,10 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[HasLifecycleCallbacks]
-#[ApiResource(normalizationContext: ['groups' => ['users_read']])]
+#[ApiResource(normalizationContext: ['groups' => ['users_read']], operations: [
+    new Get(),
+    new GetCollection()
+])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

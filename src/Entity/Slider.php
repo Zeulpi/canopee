@@ -2,13 +2,21 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
-use App\Repository\SliderRepository;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\Get;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
+use App\Repository\SliderRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: SliderRepository::class)]
-#[ApiResource]
+#[ApiResource(operations: [
+    new Get(),
+    new GetCollection()
+])]
+#[ApiFilter(SearchFilter::class, properties: ['sliderName' => 'exact'])]
 class Slider
 {
     #[ORM\Id]

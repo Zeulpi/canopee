@@ -2,15 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\PublicCibleRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: PublicCibleRepository::class)]
-#[ApiResource()]
+#[ApiResource(operations: [
+    new Get(),
+    new GetCollection()
+], normalizationContext: ['groups' => ['tarifs_read', 'public_read']])]
 class PublicCible
 {
     #[ORM\Id]
@@ -19,9 +25,11 @@ class PublicCible
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['tarifs_read', 'public_read'])]
     private ?string $categorie = null;
 
     #[ORM\Column]
+    #[Groups(['tarifs_read', 'public_read'])]
     private ?float $tva = null;
 
     /**

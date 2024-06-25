@@ -9,9 +9,14 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Timestampable;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 #[HasLifecycleCallbacks]
+#[ApiResource(operations: [
+    new Post()
+])]
 class Message
 {
     #[ORM\Id]

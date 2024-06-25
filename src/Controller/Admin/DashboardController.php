@@ -2,11 +2,14 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Entreprise;
+use App\Entity\Mention;
 use App\Entity\User;
 use App\Entity\Tarif;
 use App\Entity\Message;
 use App\Entity\Prestation;
 use App\Entity\PublicCible;
+use App\Entity\Reseau;
 use App\Entity\Slider;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,5 +59,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Public cible', 'fas fa-user', PublicCible::class);
         yield MenuItem::linkToCrud('Tarifs', 'fas fa-user', Tarif::class);
         yield MenuItem::linkToCrud('Sliders', 'fas fa-user', Slider::class);
+        yield MenuItem::linkToCrud('Infos Entreprise', 'fas fa-user', Entreprise::class);
+        yield MenuItem::linkToCrud('Reseaux sociaux', 'fas fa-user', Reseau::class);
+        yield MenuItem::linkToCrud('Mentions', 'fas fa-user', Mention::class);
     }
 }

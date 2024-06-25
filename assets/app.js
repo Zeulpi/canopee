@@ -8,6 +8,7 @@ import Header from './components/Header.jsx';
 import authAPI from './js/services/authAPI.js';
 import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer.jsx';
+import Slider from './components/Slider.jsx';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -23,7 +24,7 @@ const App = () => {
     return (
       <HashRouter>
         <Header />
-        <main className='container py-5'>
+        <main className='container py-5 w-100'>
           <Routes>
             <Route exact path="/" element={ <HomePage />} />
           </Routes>
