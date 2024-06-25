@@ -31,7 +31,9 @@ class PrestationCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nom_presta'),
-            ImageField::new('image_presta')->setUploadDir('assets/images/')
+            ImageField::new('image_presta')
+            ->setUploadDir('public/images/prestas/')
+            ->setBasePath('images/prestas/')
             ->setRequired($pageName === Crud::PAGE_NEW),
             TextEditorField::new('descr_presta'),
         ];

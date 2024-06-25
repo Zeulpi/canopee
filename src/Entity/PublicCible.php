@@ -2,21 +2,24 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\Get;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use App\Repository\PublicCibleRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Attribute\Groups;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: PublicCibleRepository::class)]
 #[ApiResource(operations: [
     new Get(),
     new GetCollection()
 ], normalizationContext: ['groups' => ['tarifs_read', 'public_read']])]
+#[ApiFilter(SearchFilter::class, properties: ['categorie' => 'exact'])]
 class PublicCible
 {
     #[ORM\Id]
@@ -37,6 +40,14 @@ class PublicCible
      */
     #[ORM\OneToMany(targetEntity: Tarif::class, mappedBy: 'categorie')]
     private Collection $tarifs;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['public_read'])]
+    private ?string $titre = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['public_read'])]
+    private ?string $description = null;
 
     public function __construct()
     {
@@ -103,6 +114,30 @@ class PublicCible
                 $tarif->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): static
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }

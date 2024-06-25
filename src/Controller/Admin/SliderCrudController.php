@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Slider;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -22,7 +23,8 @@ class SliderCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('sliderName', 'Nom du slider'),
-            ImageField::new('images')->setUploadDir('public/images/slides/')->setBasePath('public/images/slides/')->setFormTypeOption('multiple', true)->setFormTypeOption('validation_groups', false)
+            ImageField::new('images')->setUploadDir('public/images/slides/')->setBasePath('images/slides/')->setFormTypeOption('multiple', true)->setFormTypeOption('validation_groups', false),
+            ArrayField::new('comments')
         ];
     }
     

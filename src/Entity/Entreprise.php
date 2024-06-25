@@ -6,9 +6,15 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\EntrepriseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: EntrepriseRepository::class)]
-#[ApiResource]
+#[ApiResource(operations: [
+    new Get()
+])]
+#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact'])]
 class Entreprise
 {
     #[ORM\Id]

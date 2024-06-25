@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\{IdField, EmailField, TextField, ArrayField, AssociationField, TextEditorField, ChoiceField, ImageField, DateField};
+use EasyCorp\Bundle\EasyAdminBundle\Field\{IdField, EmailField, TextField, ArrayField, AssociationField, BooleanField, TextEditorField, ChoiceField, ImageField, DateField};
 use Symfony\Component\Form\Extension\Core\Type\{PasswordType, RepeatedType};
 use EasyCorp\Bundle\EasyAdminBundle\Config\{Action, Actions, Crud, KeyValueStore};
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -33,7 +33,7 @@ class UserCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
-        $roles = ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_USER'];
+        $roles = ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_EMPLOYE',];
         $fields = [
             IdField::new('id')->hideOnForm(),
             DateField::new('date')->hideOnForm(),
@@ -43,7 +43,7 @@ class UserCrudController extends AbstractCrudController
             ->setChoices(array_combine($roles, $roles))
             ->allowMultipleChoices()
             ->renderAsBadges(),
-            ImageField::new('image')->setUploadDir('public/images/avatar/')->setBasePath('public/images/avatar/')
+            ImageField::new('image')->setUploadDir('public/images/avatar/')->setBasePath('images/avatar/')
             ->setRequired($pageName === Crud::PAGE_NEW),
             TextEditorField::new('bio'),
         ];

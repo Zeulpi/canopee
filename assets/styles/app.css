@@ -31,6 +31,8 @@
 
 body {
   position: relative;
+  background-color: rgba(218, 77, 102, 0.1);
+  
 }
 
 .navHaut {
@@ -67,7 +69,6 @@ nav a {
 .presta-container:nth-child(odd),
 .tarifs-container {
   position: relative;
-  background-color: rgba(218, 77, 102, 0.1);
 }
 .about-container::after,
 .public-container::after,
@@ -93,4 +94,29 @@ nav a {
   font-weight: 600;
   color: #b23b53;
   cursor: pointer;
+}
+.public-cible > :nth-child(2) {
+  border-right: 2px solid rgba(105, 43, 133, 0.25);
+  border-left: 2px solid rgba(105, 43, 133, 0.25);
+}
+
+.public-cible .col-4 {
+  background-color: rgba(9, 129, 54, 0.25);
+  cursor: pointer;
+}
+.public-cible .public-active {
+  background-color: rgba(9, 129, 54, 0.75);
+}
+
+.public-info {
+  background-color: rgba(218, 77, 102, 0.1);
+  border-top: 2px solid rgba(105, 43, 133, 0.25);
+}
+
+.public-info > div {
+  display: none;
+}
+
+.public-info > .public-info-active {
+  display: block;
 }

@@ -30,6 +30,9 @@ class Slider
     #[ORM\Column(length: 255)]
     private ?string $sliderName = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?array $comments = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,6 +58,18 @@ class Slider
     public function setSliderName(string $sliderName): static
     {
         $this->sliderName = $sliderName;
+
+        return $this;
+    }
+
+    public function getComments(): ?array
+    {
+        return $this->comments;
+    }
+
+    public function setComments(?array $comments): static
+    {
+        $this->comments = $comments;
 
         return $this;
     }

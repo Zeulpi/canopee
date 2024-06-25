@@ -1,34 +1,30 @@
 import React from 'react'
 import logo from '../images/logo-canopees.png'
+import { useState, useEffect } from 'react'
+import axios from 'axios';
+import parse from 'html-react-parser';
+import Cadre from './Cadre';
 
-export default function Presentation(props) {
+export default function Presentation(props) { 
+
+    const [entr, setEntr] = useState({});
+    useEffect(() => {
+        function fetchData() {
+            const req = axios.get('http://localhost:8000/api/entreprises/1')
+          .then(response => {
+            setEntr(response.data);
+          })
+          .catch(error => {
+            console.error('Une erreur est survenue :', error);
+          });
+          }
+          fetchData();
+      }, []);
+      
+      
+      const description = ''+entr.description+'';
+      
   return (
-    <div className='text-canBlue'>
-      <h1 className="text-center">Canopees, c'est quoi ?</h1>
-      <div className="about row mx-auto">
-        <div className="about-left col-12 col-md-6 p-2 d-flex align-items-center">
-          <img
-            src={logo}
-            alt=""
-            className="img-fluid"
-          />
-        </div>
-        <div className="about-right col-12 col-md-6">
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga animi
-            nemo iste laboriosam corrupti incidunt reiciendis fugiat. Quisquam
-            vero fugit accusantium eligendi tenetur dolore culpa illum,
-            doloribus perspiciatis provident amet.
-          </p>
-          <p><ul>
-            <li>Lorem ipsum dolor sit amet.</li>
-            <li>Lorem ipsum dolor sit amet.</li>
-            <li>Lorem ipsum dolor sit amet.</li>
-            <li>Lorem ipsum dolor sit amet.</li>
-            <li>Lorem ipsum dolor sit amet.</li>
-          </ul></p>
-        </div>
-      </div>
-    </div>
+    <Cadre titre="Canopées c'est quoi ?" texte={entr && parse(`${entr.description}`)} type="left" image={logo}/>
   )
 }

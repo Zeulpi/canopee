@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from '../images/logo-canopees.png'
-import authAPI from '../js/services/authAPI'
+import { Link } from 'react-router-dom'
 
 export default function Header(props) {
   
@@ -16,19 +16,19 @@ export default function Header(props) {
             <div className="menu-links d-flex align-items-center">
             <ul className="navbar-nav ml-auto fs-6">
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Accueil</a>
+                        <Link to="/" className="nav-link">Accueil</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Qui sommes-nous ?</a>
+                        <Link to="/about" className="nav-link">Qui sommes-nous ?</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Prestations</a>
+                        <Link to="/" className="nav-link">Prestations</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Tarifs</a>
+                        <Link to="/" className="nav-link">Tarifs</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Contact</a>
+                        <Link to="/" className="nav-link">Contact</Link>
                     </li>
                     {/* <li className="nav-item">
                         <button onClick={handleLogout} className='btn btn-danger'>Deconnection</button>

@@ -2,13 +2,10 @@ import './bootstrap.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom/client';
-import LoginPage from './js/pages/LoginPage';
 import HomePage from './js/pages/HomePage';
-import Header from './components/Header.jsx';
-import authAPI from './js/services/authAPI.js';
+import Header from './components/Header';
 import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
-import Footer from './components/Footer.jsx';
-import Slider from './components/Slider.jsx';
+import Footer from './components/Footer';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -16,9 +13,7 @@ import Slider from './components/Slider.jsx';
  * which should already be in your base.html.twig.
  */
 import './styles/app.css';
-
-
-// authAPI.setup();
+import AboutPage from './js/pages/AboutPage.jsx';
 
 const App = () => {
     return (
@@ -26,7 +21,8 @@ const App = () => {
         <Header />
         <main className='container py-5 w-100'>
           <Routes>
-            <Route exact path="/" element={ <HomePage />} />
+            <Route path="/about" Component={ AboutPage } />
+            <Route path="/" Component={ HomePage } />
           </Routes>
         </main>
         <Footer />
