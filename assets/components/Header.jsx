@@ -22,13 +22,13 @@ export default function Header(props) {
                         <Link to="/about" className="nav-link">Qui sommes-nous ?</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/" className="nav-link">Prestations</Link>
+                        <Link to="/prestas" className="nav-link">Prestations</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/" className="nav-link">Tarifs</Link>
+                        <Link to="/tarifs" className="nav-link">Tarifs</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/" className="nav-link">Contact</Link>
+                        <Link to="/contact" className="nav-link">Contact</Link>
                     </li>
                     {/* <li className="nav-item">
                         <button onClick={handleLogout} className='btn btn-danger'>Deconnection</button>

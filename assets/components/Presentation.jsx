@@ -9,7 +9,7 @@ export default function Presentation(props) {
 
     const [entr, setEntr] = useState({});
     useEffect(() => {
-        function fetchData() {
+        function fetchPres() {
             const req = axios.get('http://localhost:8000/api/entreprises/1')
           .then(response => {
             setEntr(response.data);
@@ -18,11 +18,11 @@ export default function Presentation(props) {
             console.error('Une erreur est survenue :', error);
           });
           }
-          fetchData();
+          fetchPres();
       }, []);
       
       
-      const description = ''+entr.description+'';
+      // const description = ''+entr.description+'';
       
   return (
     <Cadre titre="Canopées c'est quoi ?" texte={entr && parse(`${entr.description}`)} type="left" image={logo}/>

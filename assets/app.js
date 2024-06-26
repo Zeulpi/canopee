@@ -14,6 +14,10 @@ import Footer from './components/Footer';
  */
 import './styles/app.css';
 import AboutPage from './js/pages/AboutPage.jsx';
+import Prestations from './js/pages/Prestations.jsx';
+import Tarifs from './js/pages/Tarifs.jsx';
+import Contact from './js/pages/Contact.jsx';
+import Mentions from './js/pages/Mentions.jsx';
 
 const App = () => {
     return (
@@ -22,6 +26,10 @@ const App = () => {
         <main className='container py-5 w-100'>
           <Routes>
             <Route path="/about" Component={ AboutPage } />
+            <Route path="/prestas" Component={ Prestations } />
+            <Route path="/tarifs" Component={ Tarifs } />
+            <Route path="/contact" Component={ Contact } />
+            <Route path="/mentions" Component={ Mentions } />
             <Route path="/" Component={ HomePage } />
           </Routes>
         </main>

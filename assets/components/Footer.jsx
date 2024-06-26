@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export default function Footer(props) {
   const [reseaux, setReseaux] = useState([]);
     useEffect(() => {
-        function fetchData() {
+        function fetchReseaux() {
             const req = axios.get('http://localhost:8000/api/reseaux')
           .then(response => {
             setReseaux(response.data["hydra:member"]);
@@ -16,14 +16,14 @@ export default function Footer(props) {
             console.error('Une erreur est survenue :', error);
           });
           }
-          fetchData();
+          fetchReseaux();
       }, []);
-      console.log(reseaux);
+      // console.log(reseaux);
 
   return (
     <footer className="bg-canGreen text-center text-canOrange">
         <div className="footer-container row mx-auto w-100 justify-content-center py-1">
-          <div className="col-4 d-flex justify-content-center align-items-center"><Link to="/" style={{'textDecoration' : 'none'}}>CGU / CGV / Mentions légales</Link></div>
+          <div className="col-4 d-flex justify-content-center align-items-center"><Link to="/mentions" style={{'textDecoration' : 'none'}}>CGU / CGV / Mentions légales</Link></div>
             <div className="footer-logo col-3 justify-content-center align-items-center row p-2"><img src={logo} alt="" /></div>
             <div className="col-5 d-flex justify-content-center align-items-center col">
             <p className="col-6" id="footer-adress"></p>

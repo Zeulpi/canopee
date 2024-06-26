@@ -7,7 +7,7 @@ export default function Slider(props) {
 
     const [sliders, setSliders] = useState([]);
     useEffect(() => {
-      function fetchData() {
+      function fetchSlider() {
         axios.get('http://localhost:8000/api/sliders', { params: {sliderName: props.name}})
           .then(response => {
             setSliders(response.data["hydra:member"]);
@@ -16,7 +16,7 @@ export default function Slider(props) {
             console.error('Une erreur est survenue :', error);
           });
         }
-        fetchData();
+        fetchSlider();
       }, []);
 
       let slides = [];

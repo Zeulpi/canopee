@@ -120,3 +120,12 @@ nav a {
 .public-info > .public-info-active {
   display: block;
 }
+.team-container {
+  width: 100%;
+  padding: 20px 0;
+}
+.team-cadre {
+  background-color: rgba(9, 129, 54, 0.15);
+  border: 2px solid rgba(105, 43, 133, 0.25);
+  border-radius: 3px;
+}

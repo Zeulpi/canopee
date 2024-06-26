@@ -15,13 +15,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[HasLifecycleCallbacks]
-#[ApiResource(normalizationContext: ['groups' => ['users_read']], operations: [
-    new Get(),
-    new GetCollection()
-])]
+#[ApiResource(
+    normalizationContext: ['groups' => ['users_read']],
+    operations: [
+        new Get(),
+        new GetCollection()
+    ]
+)]
+#[ApiFilter(SearchFilter::class, properties: ['roles' => 'partial'])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -56,6 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['users_read'])]
     private ?string $image = null;
 
     #[Timestampable(on: 'create')]
@@ -63,6 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['users_read'])]
     private ?string $bio = null;
 
 
