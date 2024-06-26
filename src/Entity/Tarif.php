@@ -35,6 +35,7 @@ class Tarif
     private ?PublicCible $categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'tarifs')]
+    #[Groups(['tarifs_read'])]
     private ?Prestation $idPresta = null;
 
     public function getId(): ?int

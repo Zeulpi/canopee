@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom'
 
 export default function Header(props) {
   
-//   const handleLogout = () => {
-//     authAPI.logout();
-//   }
     return (
     <nav className="navbar navbar-expand-sm bg-canGreen">
         <div className="container-fluid">
@@ -30,9 +27,6 @@ export default function Header(props) {
                     <li className="nav-item">
                         <Link to="/contact" className="nav-link">Contact</Link>
                     </li>
-                    {/* <li className="nav-item">
-                        <button onClick={handleLogout} className='btn btn-danger'>Deconnection</button>
-                    </li> */}
                 </ul>
             </div>
         </div>

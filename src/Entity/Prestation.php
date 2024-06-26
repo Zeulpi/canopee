@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: PrestationRepository::class)]
 #[ApiResource(operations: [
@@ -24,10 +25,8 @@ class Prestation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['tarifs_read'])]
     private ?string $nomPresta = null;
-    
-    #[ORM\Column(length: 255)]
-    private ?string $imagePresta = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $descrPresta = null;
@@ -44,6 +43,12 @@ class Prestation
     #[ORM\ManyToMany(targetEntity: Message::class, mappedBy: 'prestas')]
     private Collection $messages;
 
+    #[ORM\Column(nullable: true)]
+    private ?array $images = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $icones = null;
+
 
     public function __construct()
     {
@@ -59,18 +64,6 @@ class Prestation
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getImagePresta(): ?string
-    {
-        return $this->imagePresta;
-    }
-
-    public function setImagePresta(string $imagePresta): static
-    {
-        $this->imagePresta = $imagePresta;
-
-        return $this;
     }
 
     public function getDescrPresta(): ?string
@@ -150,6 +143,30 @@ class Prestation
         if ($this->messages->removeElement($message)) {
             $message->removePresta($this);
         }
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function setImages(?array $images): static
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    public function getIcones(): ?array
+    {
+        return $this->icones;
+    }
+
+    public function setIcones(?array $icones): static
+    {
+        $this->icones = $icones;
 
         return $this;
     }
