@@ -6,6 +6,7 @@ import HomePage from './js/pages/HomePage';
 import Header from './components/Header';
 import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
+import ScrollTop from './components/ScrollTop.jsx';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -23,7 +24,7 @@ const App = () => {
     return (
       <HashRouter>
         <Header />
-        <main className='container py-5 w-100'>
+        <main className='container py-3 w-100'>
           <Routes>
             <Route path="/about" Component={ AboutPage } />
             <Route path="/prestas" Component={ Prestations } />
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/" Component={ HomePage } />
           </Routes>
         </main>
+        <ScrollTop />
         <Footer />
       </HashRouter>
     );

@@ -23,7 +23,11 @@ class SliderCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('sliderName', 'Nom du slider'),
-            ImageField::new('images')->setUploadDir('public/images/slides/')->setBasePath('images/slides/')->setFormTypeOption('multiple', true)->setFormTypeOption('validation_groups', false),
+            ImageField::new('images')
+            ->setUploadDir('public/images/slides/')->setBasePath('images/slides/')
+            ->setFormTypeOption('multiple', true)
+            ->setFormTypeOption('validation_groups', false)
+            ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
             ArrayField::new('comments')
         ];
     }

@@ -40,7 +40,6 @@ body {
   top: 20px;
   right: 20px;
   font-size: 4rem;
-  display: none;
   cursor: pointer;
 }
 
@@ -54,7 +53,7 @@ nav a {
 .bg-canGreen {
     background-color: #098136 !important;
   }
-  footer a, nav a {
+  footer a, footer p, nav a {
     color: #f1a80f !important;
     font-family: Montserrat, sans-serif;
   }
@@ -63,6 +62,9 @@ nav a {
   }
 .text-canBlue {
     color: #2a4b9b !important;
+  }
+.text-canOrange {
+  color: #f1a80f !important;
   }
   .about-container,
 .public-container,

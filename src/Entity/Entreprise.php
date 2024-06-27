@@ -49,6 +49,9 @@ class Entreprise
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $hebergeur = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $plan = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -158,6 +161,18 @@ class Entreprise
     public function setHebergeur(?string $hebergeur): static
     {
         $this->hebergeur = $hebergeur;
+
+        return $this;
+    }
+
+    public function getPlan(): ?string
+    {
+        return $this->plan;
+    }
+
+    public function setPlan(string $plan): static
+    {
+        $this->plan = $plan;
 
         return $this;
     }

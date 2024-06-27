@@ -36,14 +36,20 @@ class UserCrudController extends AbstractCrudController
         $roles = ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_EMPLOYE',];
         $fields = [
             IdField::new('id')->hideOnForm(),
+            TextField::new('email'),
             DateField::new('date')->hideOnForm(),
             TextField::new('lastName', 'Nom'),
-            TextField::new('firstName', 'Prenom')->setRequired(false)->setEmptyData(''),
+            TextField::new('firstName', 'Prenom')
+            ->setRequired(false)
+            ->setEmptyData(''),
             ChoiceField::new('roles')
             ->setChoices(array_combine($roles, $roles))
             ->allowMultipleChoices()
             ->renderAsBadges(),
-            ImageField::new('image')->setUploadDir('public/images/avatar/')->setBasePath('images/avatar/')
+            ImageField::new('image')
+            ->setUploadDir('public/images/avatar/')
+            ->setBasePath('images/avatar/')
+            ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
             ->setRequired($pageName === Crud::PAGE_NEW),
             TextEditorField::new('bio'),
         ];

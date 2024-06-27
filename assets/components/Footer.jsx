@@ -4,10 +4,13 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
+
 export default function Footer(props) {
   const [reseaux, setReseaux] = useState([]);
+  const [entr, setEntr] = useState({});
+
     useEffect(() => {
-        function fetchReseaux() {
+        function getReseaux() {
             const req = axios.get('http://localhost:8000/api/reseaux')
           .then(response => {
             setReseaux(response.data["hydra:member"]);
@@ -16,9 +19,21 @@ export default function Footer(props) {
             console.error('Une erreur est survenue :', error);
           });
           }
-          fetchReseaux();
+          getReseaux();
       }, []);
-      // console.log(reseaux);
+      
+    useEffect(() => {
+        function getCompany() {
+            const req = axios.get('http://localhost:8000/api/entreprises/1')
+          .then(response => {
+            setEntr(response.data);
+          })
+          .catch(error => {
+            console.error('Une erreur est survenue :', error);
+          });
+          }
+          getCompany();
+      }, []);
 
   return (
     <footer className="bg-canGreen text-center text-canOrange">
@@ -26,7 +41,7 @@ export default function Footer(props) {
           <div className="col-4 d-flex justify-content-center align-items-center"><Link to="/mentions" style={{'textDecoration' : 'none'}}>CGU / CGV / Mentions légales</Link></div>
             <div className="footer-logo col-3 justify-content-center align-items-center row p-2"><img src={logo} alt="" /></div>
             <div className="col-5 d-flex justify-content-center align-items-center col">
-            <p className="col-6" id="footer-adress"></p>
+            <p className="col-6 text-canOrange" id="footer-adress">{entr.adresse}<br/>{entr.tel}</p>
             <div className="col-6">
             {reseaux && reseaux.map((value, key) => (
             <a href={value.nom === "email" ? "mailto:"+value.lien : value.lien} key={key}><i

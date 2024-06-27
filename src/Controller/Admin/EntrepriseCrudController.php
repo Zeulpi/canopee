@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\{Action, Actions, Crud, KeyValueStore};
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 class EntrepriseCrudController extends AbstractCrudController
 {
@@ -37,9 +38,16 @@ class EntrepriseCrudController extends AbstractCrudController
             TextField::new('tel'),
             TextField::new('email'),
             NumberField::new('numTva'),
-            MoneyField::new('capital')->setNumDecimals(0)->setCurrency('EUR'),
+            MoneyField::new('capital')
+            ->setNumDecimals(0)
+            ->setCurrency('EUR'),
             TextField::new('hebergeur'),
             TextEditorField::new('description'),
+            ImageField::new('plan')
+            ->setUploadDir('public/images/infos/')
+            ->setBasePath('images/infos/')
+            ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+            ->setRequired($pageName === Crud::PAGE_NEW),
         ];
     }
     

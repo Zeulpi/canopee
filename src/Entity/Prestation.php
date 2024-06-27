@@ -49,6 +49,12 @@ class Prestation
     #[ORM\Column(nullable: true)]
     private ?array $icones = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $tarifDefaut = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $uniteDefaut = null;
+
 
     public function __construct()
     {
@@ -167,6 +173,30 @@ class Prestation
     public function setIcones(?array $icones): static
     {
         $this->icones = $icones;
+
+        return $this;
+    }
+
+    public function getTarifDefaut(): ?float
+    {
+        return $this->tarifDefaut;
+    }
+
+    public function setTarifDefaut(float $tarifDefaut): static
+    {
+        $this->tarifDefaut = $tarifDefaut;
+
+        return $this;
+    }
+
+    public function getUniteDefaut(): ?string
+    {
+        return $this->uniteDefaut;
+    }
+
+    public function setUniteDefaut(string $uniteDefaut): static
+    {
+        $this->uniteDefaut = $uniteDefaut;
 
         return $this;
     }

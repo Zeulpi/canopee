@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import parse from 'html-react-parser';
+import Titre from '../../components/Titre';
 
 export default function Tarifs() {
     const [tarifs, setTarifs] = useState([]);
@@ -44,16 +44,34 @@ export default function Tarifs() {
         getPrestas()
     }, [])
 
-    // let pubListe = [];
-    // publics.map(element =>{
-    //     pubListe.push(element.categorie);
-    // })
-    
+    prestas.map((presta, key) =>{
+        let prestaObj = {};
+        prestaObj["presta"] = presta.nomPresta;
+        tarifListe.push(prestaObj);
+    })
+    publics.map((pub, key)=>{
+        let pubObj = {};
+        pubObj[pub.categorie] = "";
+        tarifListe.map((tarif, key)=>{
+            tarif[pub.categorie] = "";
+            tarif[pub.categorie+"tva"] = pub['tva'];
+        })
+    })
+    tarifs.map((tarif, key)=>{
+        tarifListe.map((elem, cle)=>{
+            elem["presta"] == tarif.idPresta.nomPresta ? (elem[tarif.categorie.categorie] = (tarif.prix_tarif/100 + (elem[tarif.categorie.categorie+"tva"]*tarif.prix_tarif/100)/100).toFixed(2)+"€/"+tarif.unite_tarif):null;
+        })
+    })
+    tarifs.map((tarif, key)=>{
+        tarifListe.map((elem, cle) =>{
+            elem[tarif.categorie.categorie] == '' && prestas[cle]['tarifDefaut']? (elem[tarif.categorie.categorie] = prestas[cle]['tarifDefaut']/100 + "€/" + prestas[cle]['uniteDefaut']):null;
+        })
+    })
     
 
   return (
-    <div className="tarifs-container w-100 py-2 text-canBlue">
-        <h1 className="text-center">Nos tarifs</h1>
+    <div className="tarifs-container">
+        <Titre titre="Nos tarifs"/>
         <table style={{"width": "80%"}} className='mx-auto'>
             <thead className='text-center'>
                 <tr>
@@ -64,16 +82,16 @@ export default function Tarifs() {
                 </tr>
             </thead>
             <tbody>
-                    {prestas.map((element, key) =>(
-                        <tr key={key} className='text-center'>
-                            <td key={key} style={{"border":"1px solid black"}} className='fw-bold'>{element.nomPresta}</td>
-                            {publics.map((pub, cle)=>(
-                                <td key={cle} style={{"border":"1px solid black"}}>{tarifs.map((tarif)=>(tarif.idPresta.nomPresta === element.nomPresta  && tarif.categorie.categorie === pub.categorie ?
-                                    `(${tarif.prix_tarif/100}€HT) ${(tarif.prix_tarif/100)+(pub.tva*tarif.prix_tarif/100)/100}€TTC/${tarif.unite_tarif}`:null))}
-                                </td>
+                {tarifListe.map((tarif, key)=>(
+                    <tr key={key} className='text-center'>
+                        <td key={key} style={{"border":"1px solid black"}} className='fw-bold'>{tarif["presta"]}</td>
+                        {publics.map((pub, cle)=>(
+                            <td key={cle} style={{"border":"1px solid black"}}>
+                                {tarif[pub.categorie] ? tarif[pub.categorie]:null}
+                            </td>
                             ))}
-                        </tr>
-                    ))}
+                    </tr>
+                ))}
             </tbody>
         </table>
     </div>

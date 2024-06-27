@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation\Timestampable;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 #[HasLifecycleCallbacks]
@@ -22,6 +23,7 @@ class Message
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Post(validationContext: ['groups' => ['Default', 'postValidation']])]
     private ?int $id = null;
 
     #[Timestampable(on: 'create')]
@@ -29,27 +31,43 @@ class Message
     private ?\DateTimeInterface $dateMessage = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10, groups: ['postValidation'])]
     private ?string $texteMessage = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, groups: ['postValidation'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, groups: ['postValidation'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 6, groups: ['postValidation'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 5, groups: ['postValidation'])]
     private ?string $tel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 5, groups: ['postValidation'])]
     private ?string $adresse = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, groups: ['postValidation'])]
     private ?string $ville = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 4, groups: ['postValidation'])]
     private ?string $zip = null;
 
     /**

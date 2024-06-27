@@ -1,14 +1,12 @@
 import React from 'react'
-import { Fragment } from 'react';
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modale from './Modale';
 
 export default function Cadre(props) {
   const [modalShow, setModalShow] = useState(false);
   return (
     <>
-      <div className='text-canBlue about-container w-100 py-2'>
+      <div className='text-canBlue about-container w-100'>
         {props.titre ? <h1 className="text-center">{props.titre}</h1> : null}
         <div className="about row mx-auto">
           <div className={`about-left col-12 col-md-6 p-2 d-flex justify-content-center ${props.image2 ? "row" : null}`} style={props.type==="right"?{
@@ -51,7 +49,8 @@ export default function Cadre(props) {
       
       
       {props.modale === "on" && props.modaleImages && props.nomPresta ?
-      (console.log(props),
+      (
+        // console.log(props),
       <Modale show={modalShow} onHide={() => setModalShow(false)} modaleimages={props.modaleImages} modalenom={props.nomPresta} size="lg"/>
       )
       : null
