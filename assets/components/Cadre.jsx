@@ -51,7 +51,7 @@ export default function Cadre(props) {
       {props.modale === "on" && props.modaleImages && props.nomPresta ?
       (
         // console.log(props),
-      <Modale show={modalShow} onHide={() => setModalShow(false)} modaleimages={props.modaleImages} modalenom={props.nomPresta} size="lg"/>
+      <Modale show={modalShow} onHide={() => setModalShow(false)} modaleimages={props.modaleImages} modalenom={props.nomPresta} size={props.modaleSize}/>
       )
       : null
       }

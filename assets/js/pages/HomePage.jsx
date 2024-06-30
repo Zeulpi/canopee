@@ -9,7 +9,7 @@ export default function HomePage(props) {
       <Slider name="Slider 1"/>
       <Presentation />
       <Publics />
-      <Slider name="Slider test 2" comments="on"/>
+      <Slider name="Dernieres reals" comments="on"/>
     </Fragment>
   )
 }

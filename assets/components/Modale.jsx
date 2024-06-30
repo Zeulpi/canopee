@@ -16,9 +16,7 @@ export default function Modale(props) {
           <Row>
             { props.modaleimages ?
             props.modaleimages.map((value, key) => (
-                
                     <img key={key} src={"images/prestas/"+value} className='col-6 pb-1'/>
-            
             ))
             :null
             }

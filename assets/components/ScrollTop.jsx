@@ -23,12 +23,12 @@ export default class ScrollTop extends Component {
         this.setState({
           theposition: winScroll,
         })
-        console.log(this.state);
+        // console.log(this.state);
       }
 
   render() {
     return (
-        <div className={`navHaut ${this.state.theposition >250 ? 'd-block': 'd-none'}`} style={{'top': this.state.theposition}} onClick={() => {document.documentElement.scrollTop = 0}}>
+        <div className={`navHaut ${this.state.theposition >250 ? 'd-block': 'd-none'}`} style={{'top': this.state.theposition, zIndex : 1000}} onClick={() => {document.documentElement.scrollTop = 0}}>
             ⬆
         </div>
     )

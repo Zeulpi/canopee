@@ -5,6 +5,9 @@
   .about-left {
     border-bottom: 2px solid rgba(105, 43, 133, 0.25);
   }
+  .menu-logo {
+    width: 40%;
+  }
 }
 @media only screen and (min-width: 769px) {
   :root {
@@ -18,6 +21,9 @@
     border-left: 2px solid rgba(105, 43, 133, 0.25);
     border-right: none;
   }
+  .menu-logo {
+  width: 20%;
+}
 }
  nav a {
   font-family: Montserrat, sans-serif;
@@ -43,9 +49,7 @@ body {
   cursor: pointer;
 }
 
-.menu-logo {
-  width: 20%;
-}
+
 
 nav a {
   font-size: calc(0.8rem + 0.5vw);

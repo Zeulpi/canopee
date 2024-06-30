@@ -5,7 +5,7 @@ import Mention from '../../components/Mention';
 
 export default function Mentions() {
   const [mentions, setMentions] = useState([]);
-  const getResult = async () => {
+  const getMentions = async () => {
     await axios.get('http://localhost:8000/api/mentions')
     .then(response => {
     setMentions(response.data["hydra:member"]);
@@ -18,7 +18,7 @@ export default function Mentions() {
   console.log(mentions);
 
 useEffect(() => {
-    getResult()
+    getMentions()
 }, [])
 
   return (

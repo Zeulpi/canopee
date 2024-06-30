@@ -22,11 +22,14 @@ export default function Slider(props) {
       let slides = [];
       let descriptions = [];
       const stockImage = () => {
-        sliders && sliders.map(slider => (slides = slider.images, descriptions = slider.comments));
+        sliders.map((slider, key) => (
+          slides = slider.images,
+          descriptions = slider.comments
+        ));
         
-        // console.log(typeof sliders);
-        // slides && console.log(slides[0]);
-        // descriptions && console.log(descriptions[0]);
+        // console.log(sliders[0] && sliders[0].comments);
+        // slides && console.log(slides);
+        // descriptions && console.log(descriptions);
       }
       stockImage();
       

@@ -32,7 +32,7 @@ class PrestationCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nom_presta'),
-            ImageField::new('images')
+            ImageField::new('images', 'Images d\'exemple')
             ->setUploadDir('public/images/prestas/')
             ->setBasePath('images/prestas/')
             ->setFormTypeOption('multiple', true)
@@ -44,7 +44,7 @@ class PrestationCrudController extends AbstractCrudController
             ->setFormTypeOption('multiple', true)
             ->setFormTypeOption('validation_groups', false)
             ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
-            MoneyField::new('tarifDefaut', 'Prix unitaire')->setNumDecimals(2)->setCurrency('EUR'),
+            MoneyField::new('tarifDefaut', 'Prix unitaire H.T.')->setNumDecimals(2)->setCurrency('EUR'),
             TextField::new('uniteDefaut', 'Unité tarifaire'),
             TextEditorField::new('descr_presta'),
         ];

@@ -194,7 +194,7 @@ class Prestation
         return $this->uniteDefaut;
     }
 
-    public function setUniteDefaut(string $uniteDefaut): static
+    public function setUniteDefaut(string $uniteDefaut = null): static
     {
         $this->uniteDefaut = $uniteDefaut;
 

@@ -25,7 +25,7 @@ export default function Prestations() {
     <Fragment>
         <Titre titre="Nos prestations"/>
         {prestas && prestas.map((value, key) => (
-            <Cadre key={key} nomPresta={value.nomPresta} texte={parse(`${value.descrPresta}`)} type={key % 2 === 0 ? "left" : "right"} image={`images/prestas/${value.icones[0]}`} image2={`images/prestas/${value.icones[1]}`} modale="on" modaleImages={value.images}/>
+            <Cadre key={key} nomPresta={value.nomPresta} texte={parse(`${value.descrPresta}`)} type={key % 2 === 0 ? "left" : "right"} image={`images/prestas/${value.icones[0]}`} image2={`images/prestas/${value.icones[1]}`} modale="on" modaleImages={value.images} modaleSize="xl" />
         ))}
     </Fragment>
   )
