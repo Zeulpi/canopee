@@ -1,0 +1,8 @@
+.accordion{
+    --bs-accordion-btn-icon : ''!important;
+    --bs-accordion-btn-active-icon : : ''!important;
+    --bs-accordion-btn-bg: transparent!important;
+    --bs-accordion-bg: transparent !important;
+    --bs-accordion-border-color: transparent !important;
+    --bs-accordion-active-bg: transparent !important;
+}
