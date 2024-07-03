@@ -1,26 +1,26 @@
 import React, { Fragment } from 'react'
 import Cadre from '../../components/Cadre'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import parse from 'html-react-parser';
 import Titre from '../../components/Titre';
+import requetesAPI from '../services/requetesAPI';
 
 export default function Prestations() {
     const [prestas, setPrestas] = useState([]);
-    const getResult = async () => {
-        await axios.get('http://localhost:8000/api/prestations')
-        .then(response => {
-        setPrestas(response.data["hydra:member"]);
-        })
-        .catch(error => {
+
+    const getPrestas = async () => {
+        try {
+            const data = await requetesAPI.findAll('prestations')
+            setPrestas(data);
+        }
+        catch (error) {
             console.error('Une erreur est survenue :', error);
-        });
+        };
     }
     useEffect(() => {
-        getResult()
+        getPrestas()
     }, [])
 
-    console.log(prestas);
   return (
     <Fragment>
         <Titre titre="Nos prestations"/>

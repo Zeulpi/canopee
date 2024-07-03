@@ -2,24 +2,24 @@ import React from 'react'
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import CarteMembre from './CarteMembre';
+import requetesAPI from '../js/services/requetesAPI';
 
 export default function Team(props) {
 
     const [team, setTeam] = useState([]);
     
-    const getResult = async () => {
-        await axios.get('http://localhost:8000/api/users', { params: {roles: 'ROLE_EMPLOYE'}})
-        .then(response => {
-        setTeam(response.data["hydra:member"]);
-        })
-        .catch(error => {
-            console.error('Une erreur est survenue :', error);
-        });
+    const getTeam = async () => {
+      try {
+        const data = await requetesAPI.findTeam( 'ROLE_EMPLOYE' )
+        setTeam(data);
+      }
+      catch (error) {
+          console.error('Une erreur est survenue :', error);
+      };
     }
-    useEffect(() => {
-        getResult()
+      useEffect(() => {
+        getTeam()
     }, [])
-
 
   return (
     <div className="team-container col justify-content-center">

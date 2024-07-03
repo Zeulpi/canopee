@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Titre from '../../components/Titre';
+import requetesAPI from '../services/requetesAPI';
 import '../../styles/tarifs.css';
 
 export default function Tarifs() {
@@ -11,31 +11,31 @@ export default function Tarifs() {
     let tarifListe = [];
 
     const getTarifs = async () => {
-        await axios.get('http://localhost:8000/api/tarives')
-        .then(response => {
-            setTarifs(response.data["hydra:member"]);
-        })
-        .catch(error => {
+        try {
+            const data = await requetesAPI.findAll('tarives')
+            setTarifs(data);
+        }
+        catch (error) {
             console.error('Une erreur est survenue :', error);
-        });
+        };
     }
     const getPublics = async () => {
-        await axios.get('http://localhost:8000/api/public_cibles')
-        .then(response => {
-        setPublics(response.data["hydra:member"]);
-        })
-        .catch(error => {
+        try {
+            const data = await requetesAPI.findAll('public_cibles')
+            setPublics(data);
+        }
+        catch (error) {
             console.error('Une erreur est survenue :', error);
-        });
+        };
     }
     const getPrestas = async () => {
-        await axios.get('http://localhost:8000/api/prestations')
-        .then(response => {
-        setPrestas(response.data["hydra:member"]);
-        })
-        .catch(error => {
+        try {
+            const data = await requetesAPI.findAll('prestations')
+            setPrestas(data);
+        }
+        catch (error) {
             console.error('Une erreur est survenue :', error);
-        });
+        };
     }
     useEffect(() => {
         getTarifs()
@@ -107,7 +107,7 @@ export default function Tarifs() {
                             <td key={cle} >
                                 {tarif[pub.categorie] ? tarif[pub.categorie]:null}
                             </td>
-                            ))}
+                        ))}
                     </tr>
                 ))}
             </tbody>

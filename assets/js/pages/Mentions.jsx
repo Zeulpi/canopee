@@ -1,21 +1,20 @@
 import React from 'react'
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Mention from '../../components/Mention';
+import requetesAPI from '../services/requetesAPI';
 
 export default function Mentions() {
   const [mentions, setMentions] = useState([]);
-  const getMentions = async () => {
-    await axios.get('http://localhost:8000/api/mentions')
-    .then(response => {
-    setMentions(response.data["hydra:member"]);
-    })
-    .catch(error => {
-        console.error('Une erreur est survenue :', error);
-    });
-  }
 
-  console.log(mentions);
+  const getMentions = async () => {
+    try {
+      const data = await requetesAPI.findAll('mentions')
+      setMentions(data);
+    }
+    catch (error) {
+        console.error('Une erreur est survenue :', error);
+    };
+  }
 
 useEffect(() => {
     getMentions()

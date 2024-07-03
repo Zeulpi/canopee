@@ -16,7 +16,7 @@
   .about-left {
     border-right: 2px solid rgba(105, 43, 133, 0.25);
   }
-  .presta-container:nth-child(2n) .col-md-6:first-child {
+  .about-container:nth-child(2n) .col-md-6:first-child {
     order: 2;
     border-left: 2px solid rgba(105, 43, 133, 0.25);
     border-right: none;

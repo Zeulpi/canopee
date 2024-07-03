@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import requetesAPI from '../js/services/requetesAPI';
 
 
 export default function Plan() {
     const [entr, setEntr] = useState({});
     
-        function getCompany() {
-            const req = axios.get('http://localhost:8000/api/entreprises/1')
-          .then(response => {
-            setEntr(response.data);
-          })
-          .catch(error => {
-            console.error('Une erreur est survenue :', error);
-          });
-          }
-          useEffect(() => {
-            getCompany();
-            }, [])
+    const getCompany = async() => {
+      try {
+        const data = await requetesAPI.findOne('entreprises', 1)
+        setEntr(data);
+      }
+      catch (error) {
+        console.error('Une erreur est survenue :', error);
+      };
+    }
+    useEffect(() => {
+      getCompany();
+    }, [])
       
   return (
     <>

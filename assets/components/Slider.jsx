@@ -2,36 +2,34 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Carousel } from 'react-bootstrap';
+import requetesAPI from '../js/services/requetesAPI';
 
 export default function Slider(props) {
 
-    const [sliders, setSliders] = useState([]);
+  const [sliders, setSliders] = useState([]);
+  
+  const getSlider = async () => {
+    try {
+      const data = await requetesAPI.findSlider( props.name )
+      setSliders(data);
+    }
+    catch (error) {
+        console.error('Une erreur est survenue :', error);
+    };
+  }
     useEffect(() => {
-      function fetchSlider() {
-        axios.get('http://localhost:8000/api/sliders', { params: {sliderName: props.name}})
-          .then(response => {
-            setSliders(response.data["hydra:member"]);
-          })
-          .catch(error => {
-            console.error('Une erreur est survenue :', error);
-          });
-        }
-        fetchSlider();
-      }, []);
+      getSlider()
+  }, [])
 
-      let slides = [];
-      let descriptions = [];
-      const stockImage = () => {
-        sliders.map((slider, key) => (
-          slides = slider.images,
-          descriptions = slider.comments
-        ));
-        
-        // console.log(sliders[0] && sliders[0].comments);
-        // slides && console.log(slides);
-        // descriptions && console.log(descriptions);
-      }
-      stockImage();
+  let slides = [];
+  let descriptions = [];
+  const stockImage = () => {
+    sliders.map((slider, key) => (
+      slides = slider.images,
+      descriptions = slider.comments
+    ));
+  }
+  stockImage();
       
   return (
     <div className='slider w-100'>

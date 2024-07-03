@@ -3,8 +3,6 @@ import Card from 'react-bootstrap/Card';
 import parse from 'html-react-parser';
 
 export default function CarteMembre(props) {
-  // let bio = props.membre.bio.replace("<div>", "");
-  // bio = bio.replace("</div>", "");
   return (
     <div className='col-6 col-md-5 justify-content-center d-flex'>
       <Card style={{ width: '18rem' }} className='team-cadre'>

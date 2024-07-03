@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Field from '../../components/Form/Field'
-import axios from 'axios';
 import FieldArea from '../../components/Form/FieldArea';
 import Titre from '../../components/Titre';
 import Modale from '../../components/Modale';
 import Plan from '../../components/Plan';
+import requetesAPI from '../services/requetesAPI';
 
 
 export default function Contact() {
@@ -39,17 +39,15 @@ export default function Contact() {
     zip:"",
     texteMessage:""
   });
-  
   const sendMessage = async () => {
-    await axios.post('http://localhost:8000/api/messages', message)
-    .then(response => {
-      response.status === 201 ? setModalShow(true) : null
-      }
-    )
-    .catch(error => {
+    try {
+      const retour = await requetesAPI.postMessage(message)
+      retour === 201 ? setModalShow(true) : null
+    }
+    catch (error) {
         console.error('Une erreur est survenue :', error);
-    });
-}
+    };
+  }
 
   const handleChange = ({currentTarget}) => {
     const {name, value} = currentTarget;
